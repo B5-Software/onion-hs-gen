@@ -1,0 +1,160 @@
+<!--
+Onion HS Gen - Onion Service Generator
+Author: B5-Software
+License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+This software performs calculations based on the mkp224o (CC0 license) binary.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    Onion HS Gen by B5-Software, open source under CC0 license.
+    Based on mkp224o (CC0 license) binary.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onion HS Gen - Onion Service Generator</title>
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <link rel="stylesheet" href="../assets/styles/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--
+    This software is open source under the CC0 license, author: B5-Software.
+    Calculation core based on mkp224o under CC0 license.
+    -->
+    <div class="app-container">
+        <!-- Title bar -->
+        <div class="title-bar">
+            <div class="title-text">
+                <img src="../assets/icons/icon.svg" alt="Logo" class="title-logo">
+                <h1>Onion HS Gen <span class="version">v1.0.0</span></h1>
+            </div>
+            <div class="window-controls">
+                <button id="minimize-btn" class="control-btn minimize" style="display:none;"></button>
+                <button id="maximize-btn" class="control-btn maximize" style="display:none;"></button>
+                <button id="close-btn" class="control-btn close" style="display:none;"></button>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 id="system-title">System Info</h3>
+                    <div class="info-item">
+                        <label id="cpu-info-label">CPU:</label>
+                        <span id="cpu-info">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label id="cpu-cores-label">Threads:</label>
+                        <span id="cpu-cores">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label id="mem-info-label">Memory:</label>
+                        <span id="mem-info">Loading...</span>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3 id="workdir-title">Working Directory</h3>
+                    <div class="workdir-info">
+                        <p id="workdir-path" class="path-display">Loading...</p>
+                        <button id="select-dir-btn" class="btn-secondary"><span id="workdir-change">Change</span></button>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3 id="about-title">About</h3>
+                    <p class="about-text" id="about-text">
+                        Onion HS Gen is a graphical client for <strong>mkp224o</strong>, used to generate vanity Tor v3 onion service addresses.
+                    </p>
+                    <p class="credits" id="about-credits">
+                        Based on mkp224o<br>2025 B5-Software
+                    </p>
+                </div>
+                <div class="sidebar-section sidebar-settings" style="margin-top:40px;">
+                    <h3 id="settings-title">Settings</h3>
+                    <div class="theme-switch-container">
+                      <span>🌙</span>
+                      <label class="theme-switch">
+                        <input type="checkbox" id="theme-toggle-btn">
+                        <span class="slider"></span>
+                      </label>
+                      <span>☀️</span>
+                    </div>
+                    <div class="lang-switch-container" style="margin-top:18px;">
+                      <label for="lang-select" style="font-size:13px;">Language / 语言：</label>
+                      <select id="lang-select" class="lang-select" style="margin-left:8px;">
+                        <option value="en">English</option>
+                        <option value="zh">简体中文</option>
+                      </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content area -->
+            <div class="content-area">
+                <div class="generation-controls">
+                    <h2 id="gen-title">Generate Onion v3 Address</h2>
+                    
+                    <div class="control-group">
+                        <label for="domain-count" id="domain-count-label">Count:</label>
+                        <input type="number" id="domain-count" min="1" value="5">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="prefix-input" id="prefix-label">Optional Prefix (a-z, 2-7):</label>
+                        <input type="text" id="prefix-input" maxlength="10" pattern="[a-z2-7]*">
+                        <small class="hint" id="prefix-hint">Leave blank for random</small>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="start-btn" class="btn-primary">Start</button>
+                        <button id="stop-btn" class="btn-danger" disabled>Stop</button>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3 id="status-title">Status</h3>
+                        <div id="generation-status" class="status-idle">Idle</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="speed-title">Current Speed</h3>
+                        <div class="stat-value"><span id="current-speed">0</span> calc/sec</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="keys-title">Keys Generated</h3>
+                        <div class="stat-value"><span id="keys-generated">0</span></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="elapsed-title">Elapsed Time</h3>
+                        <div class="stat-value"><span id="elapsed-time">0 s</span></div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="speed-chart"></canvas>
+                </div>
+
+                <div id="completion-animation" class="completion-animation">
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="message" id="completion-msg">Generation Complete!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "onion-hs-gen",
+  "productName": "Onion HS Gen by B5-Software",
+  "version": "1.0.0",
+  "description": "GUI client for mkp224o - generating vanity onion v3 addresses",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.github.b5software.onionhsgen",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "asarUnpack": [
+      "bin/**"
+    ]
+  },
+  "author": "B5-Software",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "fs-extra": "^11.2.0",
+    "path": "^0.12.7",
+    "systeminformation": "^5.18.17"
+  }
+}

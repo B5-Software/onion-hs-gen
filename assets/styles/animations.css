@@ -1,0 +1,94 @@
+/* Animations */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Element animations */
+.generation-controls {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.stats-container {
+    animation: slideIn 0.5s ease-out;
+}
+
+.chart-container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Confetti animation */
+.confetti:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation: confettiFall 3s ease-in 0s infinite;
+}
+
+.confetti:nth-child(2) {
+    top: 15%;
+    left: 40%;
+    animation: confettiFall 3s ease-in 0.5s infinite;
+}
+
+.confetti:nth-child(3) {
+    top: 5%;
+    left: 60%;
+    animation: confettiFall 3s ease-in 0.2s infinite;
+}
+
+.confetti:nth-child(4) {
+    top: 20%;
+    left: 80%;
+    animation: confettiFall 3s ease-in 0.7s infinite;
+}
+
+.confetti:nth-child(5) {
+    top: 10%;
+    left: 30%;
+    animation: confettiFall 3s ease-in 0.3s infinite;
+}
+
+.confetti:nth-child(6) {
+    top: 15%;
+    left: 70%;
+    animation: confettiFall 3s ease-in 0.6s infinite;
+}
+
+.confetti:nth-child(7) {
+    top: 5%;
+    left: 50%;
+    animation: confettiFall 3s ease-in 0.4s infinite;
+}
+
+.confetti:nth-child(8) {
+    top: 20%;
+    left: 90%;
+    animation: confettiFall 3s ease-in 0.8s infinite;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
